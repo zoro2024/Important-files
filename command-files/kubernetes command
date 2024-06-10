@@ -1,0 +1,39 @@
+kubectl run <image name> --> to deploy application on cluster
+kubectl cluster-info  --> to view info about cluster
+kubectl get nodes  --> to list all the nodes part of cluster
+
+kubectl apply/create -f <filename/replicaset filename>  --> to create pod/ to create replicaset
+kubectl get pods  --> to see list of pods
+kubectl get pods -o wide  --> to see pods are running on which node
+kubectl describe pod <pod name>  -->  to see details about pod
+kubectl get pod -n <name space dev/prod> --> it will list all pods of that namespace/environment
+kubectl create ns <name>  --> to create namespace
+kubectl create -f <yaml file> -n <namespace  --> to create pod inside particular namespace or just add namespace directly in yaml with env
+kubectl run nginx(nginx is name we gave to pod or deployment) --image=nginx  --> to create pod
+kubectl delete pod <pod name>  -->  to delete pod
+kubectl get replicasets/rs --> to list replicaset
+kubectl describe replicaset <name of replicaset> --> to get detailed info of replicaset
+kubectl edit replicaset <name of replicaset>  --> to make changes in configuration of running replicaset like increasing replicas or decreasing there will be lot more details tin file then the yaml from which we created this replicaset. so we need to be very careful with this.
+kubectl scale replicaset <name of replicaset> --replicas=2  -->  to make changes in running replica without going inside configuration of replcaset conf file
+
+kubectl get nodes -o wide --> to know cri(container runtime) of pods  
+aws sts get-caller-identity --> to know aws cli user 
+kubectl delete <replicaset name>/ kubectl delete -f <.yml> --> to delete replicaset
+kubectl explain replicaset  --> to get all info about replicaset yaml, or what changes do we need to make to not get error
+ 
+kubectl get deployment  --> to see newly created deployment
+kubectl get all --> to see deployment which was created, replicaset and pods created from deployment
+kubectl create -f <yaml file> -n <namespace  --> to create pod inside particular namespace or just add namespace directly in yaml with env
+kubectl api-resources - 
+
+kubectl rollout history deploy <name of deployment>  -->  to check rollout history
+kubectl rollout history deploy <name of deployment> -n <namespace>  -->  to check rollout history of particular environement/namespace
+kubectl create -f deployment -<yaml file>  -->  to create deployment [ instead of this use apply]
+kubectl apply -f deployment -<yaml file>  -->  to trigger new rollout and new version is created
+kubectl describe deployment <deployment name>  --> to see detailed info about deployment
+kubectl describe deployment/<deployment name> -->  to check status of deployment
+kubectl rollout undo deployment <deployment-name> --to-revision=<revision-number> -->  to go back on previous revision/version
+
+kubectl delete svc <object name> -->  to delete objects like service like 
+
+aws eks update-kubeconfig --region ap-south-1 --name firstcluster  

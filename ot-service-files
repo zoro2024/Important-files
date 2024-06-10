@@ -1,0 +1,70 @@
+attendance.service
+[Unit]
+Description=attendance service
+After=network.target
+
+[Service]
+User=akshit
+Group=akshit
+WorkingDirectory=/home/akshit/application/attendance-api
+Environment="PATH=/home/akshit/application/attendance-api/venv/bin"
+ExecStart=/home/akshit/application/attendance-api/venv/bin/gunicorn app:app --log-config log.conf -b 0.0.0.0:8088
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
+
+employee.service
+[Unit]
+Description=Employee Service
+After=network.target
+
+[Service]
+User=akshit
+Group=akshit
+WorkingDirectory=/home/akshit/application/employee-api
+Environment=GIN_MODE=release
+ExecStart=/home/akshit/application/employee-api/employee-api
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
+
+salary.service
+[Unit]
+Description=salary service
+
+[Service]
+User=akshit
+Group=akshit
+WorkingDirectory=/home/akshit/application/salary-api
+ExecStart=java -jar -Dserver.port=8089 target/salary-0.1.0-RELEASE.jar
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
+
+frontend.service
+[Unit]
+Description=frontend service
+After=network.target
+
+[Service]
+User=akshit
+Group=akshit
+WorkingDirectory=/home/akshit/application/frontend
+Environment="PATH=/home/akshit/.nvm/versions/node/v16.0.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+ExecStart=/home/akshit/.nvm/versions/node/v16.0.0/bin/serve -s build
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
+
+
+
+
+

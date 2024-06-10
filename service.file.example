@@ -1,0 +1,56 @@
+[Unit]
+Description=salary service
+After=network.target
+
+[Service]
+User=akshit
+Group=akshit
+WorkingDirectory=/home/akshit/application/salary-api
+ExecStart=java -jar -Dserver.port=8089 target/salary-0.1.0-RELEASE.jar
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
+
+
+
+
+### After making service file run these commands
+sudo systemctl daemon-reload
+sudo systemctl start salary.service
+sudo systemctl enable salary.service
+
+### command to stop any service and not start at time of reboot
+sudo systemctl stop test-app.service
+sudo systemctl disable test-app.service
+
+### my personal configuration which i have done in service files
+
+employee runnning on 8080, salary running on 8089, attendance is running on 8088, frontend is running at 3000
+
+A service file,  particularly within the Linux environment, is a configuration file used to manage and control services. These files are essential components of service management systems like systemd, which is responsible for initializing and managing system processes.
+
+Key Points:
+
+Purpose:
+
+Service files define how services are started, stopped, and managed.
+They automate and standardize the management of services across various environments.
+
+Location:
+
+Typically found in directories like /etc/systemd/system or /lib/systemd/system.
+
+Structure:
+
+[Unit] Section: Contains general information about the service.
+Description: Brief description of the service.
+After: Defines the order of service start-up.
+[Service] Section: Specifies how the service should be executed.
+ExecStart: Command to start the service.
+ExecStop: Command to stop the service.
+Restart: Defines restart behavior (e.g., on failure).
+User: User under which the service runs.
+[Install] Section: Installation details.
+WantedBy: Target for enabling/disabling the service.

@@ -1,0 +1,5 @@
+vpc = "10.0.0.0/16"
+tanancy = "default"
+vpc_tag = "new"
+sub_tag = "new sub"
+sub_cidr = "10.0.0.0/24"

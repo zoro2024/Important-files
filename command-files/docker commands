@@ -1,0 +1,51 @@
+docker ps --> to check running container and get all details
+docker ps -a --> to check all container even stopped one
+docker run (image name) --> to start container
+docker run -d (imange name) --> to run container in detached mode so we can use terminal aswell
+docker run -d --name (custom name of coantiner) (image name) --> to give custom name to conatiner use  --name
+docker run -p (host port:conatiner port) (imange name) --> to give custom host port to conatiner use -p. Or it will use the container default configuration port
+
+docker images --> to see all images available in local
+docker rmi (image name) --> to remove image
+docker rmi $(docker images -q)  -->  to delete all images at once
+docker pull (imange name) --> just to pull image of contianer not start the conatainer
+docker stop (contianer name/ID)  --> to stop container
+docker rm (contianer name/ID) --> to remove stopped container (first we need to stop container)
+docker rm -f (contianer name/ID)  --> to remove container forecfully
+docker container rm -f $(docker container ls -a -q)  --> to remove all container at once
+docker start (contianer name/ID)  --> to start stopped container again
+docker exec -it (contianer name/ID) bash --> to go inside container
+docker run -e MY_VAR=value (imange name) -->  to pass variable while creating continer
+docker run --env-file=env.list (imange name) -->    to pass variable with file while creating continer(easy in passing multiple variables) 
+docker run -d --name new -e key=value -p 8090:80 --memory=10m --cpus=0.5m --memory-reservation=6m nginx  -->  create container with soft load
+docker stats  -->  check stats of running container like memory utilization, cpu
+
+docker exec container name printenv -->  print all variables of container
+
+docker run -d -p 83:80 -v <local path of dir>:<container path> (image name) --> to sync local dir with container dir (this will delete all data which will be present inside container that dir which we are syncing that with)
+docker run -d -v <volume name>:<container path> (image name)  --> to attach volume with container 
+docker run -d --name nginx -p 80:80 -v opstree-vol:/usr/share/nginx/html:ro nginx --> to give readonly permissions
+
+docker connect (network name) (contianer name/ID) --> to change network of container
+docker run -d -P --name c3 --network=<network name> (Image name) -->  to give network while creating container
+docker network ls --> to list networks
+docker network create <network_name> --> to create custom bridge network
+inetutils -->  install ping command 
+
+
+docker run -d --name c1 --network=custom1 nginx
+
+docker inspect --> 
+docker network/volume --help --> list further command that we can use use --help
+yes > /dev/null &  --> put stress on conatiner run from inside container
+
+sudo apt install docker.io -y  --> install docekr on ubuntu
+
+docker run -d --name part22 --user mohan part1.2 sleep 1000
+
+
+
+
+docker login -u username
+docker tag old-tag new-tag
+docker push new-tag

@@ -1,0 +1,44 @@
+ map_public_ip_on_launch = true  --> main of module subnetpublic
+ 
+ 
+---
+plugin: aws_ec2
+
+regions:
+   - "us-east-1"
+
+filters:
+  tag:Name:
+    - "sonar"
+
+
+compose:
+    ansible_host: private_ip_address
+   
+   
+   
+   
+   
+ansible-playbook -i aws_ec2.yaml --private-key=practice.pem nginx.yaml - final
+   
+working command for role ( ansible-playbook -i aws_ec2.yaml --private-key=/home/akshit/Downloads/practice.pem install.yml -u ubuntu )
+   
+    
+working command for adhoc ( ansible -i aws_ec2.yaml all -m command -a "mkdir /home/ubuntu/jhandu" --private-key=practice.pem -u ubuntu)
+    
+ansible-inventory -i aws_ec2.yaml all -m command -a "mkdir /home/ubuntu/jhandu" --private-key=/home/ubuntu/new.pem -u ubuntu
+
+commands for dynamic inv to work
+sudo apt install ansible
+configure directory inside /etc/ansible/ansible.cfg
+#####     IMPORTANT        #####
+ansible-galaxy collection install amazon.aws - https://docs.ansible.com/ansible/latest/collections/amazon/aws/aws_ec2_inventory.html
+sudo apt install pip
+pip3 install boto3
+configure aws cli through documentation -  https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+
+
+change user to jenkins and run below command (using ansible plugin)
+pip3 install boto3
+need to define aws access key, secret key in pipeline only
+

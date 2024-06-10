@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ninja25-deploy
+  labels:
+    app: frontend
+    env: dev
+  namespace: dev
+  annotations:
+    kubernetes.io/change-cause: "Updating the ninja batch image"
+spec:
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  replicas: 10
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      name: ninja25
+      namespace: dev
+      labels:
+        app: frontend
+        env: dev
+    spec:
+      containers:
+      - image: nginx:1.14.2
+        name: frontend
+        ports:
+        - name: http
+          containerPort: 80
+          protocol: TCP
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: http
+          initialDelaySeconds: 15
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /
+            port: http
+          initialDelaySeconds: 10
+          periodSeconds: 5
